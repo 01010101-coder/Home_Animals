@@ -39,23 +39,22 @@ shared_ptr<Animal> getTypeOfClass(string type, vector<string> &words) {
     return universalVariable;
 }
 
-void addData(map<User, vector<Animal*>> &users, vector<string> &words) {
+void addData(map<User, vector<shared_ptr<Animal>>>& users, vector<string>& words) {
     string name = words[0];
     string type = words[1];
     shared_ptr<Animal> universalVariable = getTypeOfClass(type, words);
 
     for (auto& user : users) {
         if (user.first.getUsername() == name) {
-            user.second.push_back(universalVariable.get());
+            user.second.push_back(universalVariable);
             return;
         }
     }
 
-    users.insert(make_pair(User(name), vector<Animal*>({})));
-    users[name].push_back(universalVariable.get());
+    users.insert({User(name), {universalVariable}});
 }
 
-int countUniqueValues(const vector<Animal*>& vec) {
+int countUniqueValues(const vector<shared_ptr<Animal>>& vec) {
     unordered_set<string> uniqueSet;
 
     for (const auto& value : vec) {
@@ -65,7 +64,7 @@ int countUniqueValues(const vector<Animal*>& vec) {
     return uniqueSet.size();
 }
 
-void printType(const string cons, const map<User, vector<Animal*>> &users) {
+void printType(const string cons, const map<User, vector<shared_ptr<Animal>>> &users) {
     unordered_map<string, string> animals;
     for (const auto& user : users) {
         for (const auto& animal : user.second) {
@@ -90,7 +89,7 @@ void printType(const string cons, const map<User, vector<Animal*>> &users) {
     }
 }
 
-void countAnimal(const string cons, const map<User, vector<Animal*>> &users) {
+void countAnimal(const string cons, const map<User, vector<shared_ptr<Animal>>> &users) {
     int count = 0;
     for (const auto& user : users) {
         for (const auto& animal : user.second) {
@@ -108,7 +107,7 @@ void countAnimal(const string cons, const map<User, vector<Animal*>> &users) {
     cout << count << endl;
 }
 
-void mostAge(const map<User, vector<Animal*>> &users) {
+void mostAge(const map<User, vector<shared_ptr<Animal>>> &users) {
     unordered_map<string, vector<int>> animals;
     for (const auto& user : users) {
         for (const auto& animal : user.second) {
@@ -138,7 +137,7 @@ int main() {
     string line;
     vector<string> words;
 
-    map<User, vector<Animal*>> users;
+    map<User, vector<shared_ptr<Animal>>> users;
     while (getline(input, line)) {
         split(line, words);
         addData(users, words);

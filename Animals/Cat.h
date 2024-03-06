@@ -25,11 +25,11 @@ public:
         cout << name << " " << age << " " << color << endl;
     }
 
-    void makeSound() override {
+    void makeSound() const override {
         cout << "Meow" << endl;
     }
 
-    string getType() override{
+    string getType() const override{
         return "Кот";
     }
 };

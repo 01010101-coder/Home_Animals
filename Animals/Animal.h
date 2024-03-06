@@ -10,7 +10,6 @@ protected:
     string name;
     int age;
 public:
-
     Animal(string name, int age) : name(name), age(age) {};
 
     string getName() const;
@@ -19,8 +18,8 @@ public:
     void setName(string name);
     void setAge(int age);
 
-    virtual void makeSound() = 0;
-    virtual string getType() = 0;
+    virtual void makeSound() const = 0;
+    virtual string getType() const = 0;
 };
 
 #endif

@@ -30,11 +30,11 @@ public:
         this->isTrained = isTrained;
     }
 
-    void makeSound() override {
+    void makeSound() const override {
         cout << "Woof" << endl;
     }
 
-    string getType() override{
+    string getType() const override{
         return "Собака";
     }
 };

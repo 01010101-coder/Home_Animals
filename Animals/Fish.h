@@ -30,11 +30,11 @@ public:
         this->size = size;
     }
 
-    void makeSound() override {
+    void makeSound() const override {
         cout << "Bloop" << endl;
     }
 
-    string getType() override {
+    string getType() const override {
         return "Рыба";
     }
 };

@@ -26,11 +26,11 @@ public:
         this->info = info;
     }
 
-    void makeSound() override {
+    void makeSound() const override {
         cout << "I don't know what to say" << endl;
     }
 
-    string getType() override {
+    string getType() const override {
         return type;
     }
 };
