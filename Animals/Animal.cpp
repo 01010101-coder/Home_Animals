@@ -10,8 +10,8 @@ int Animal::getAge() const {
     return age;
 }
 
-void Animal::setName(string name) {
-    this->name = name;
+void Animal::setName(string newName) {
+    name = move(newName);
 }
 
 void Animal::setAge(int age) {
