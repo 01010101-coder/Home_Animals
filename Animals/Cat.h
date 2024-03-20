@@ -13,9 +13,11 @@ private:
 public:
     Cat(string name, int age, string color) : Animal(std::move(name), age), color(std::move(color)) {};
 
+    Cat(Cat&& other) noexcept : Animal(other), color(std::move(other.color)) {}
+
     Cat& operator=(Cat&& other) noexcept {
         if (this != &other) {
-            Animal::operator=(std::move(other));
+            Animal::operator=(other);
             color = std::move(other.color);
         }
         return *this;
@@ -26,7 +28,7 @@ public:
     }
 
     void setColor(string newColor) {
-        color = move(newColor);
+        color = std::move(newColor);
     }
 
     void getCat() {

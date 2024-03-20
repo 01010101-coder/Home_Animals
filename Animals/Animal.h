@@ -12,11 +12,11 @@ protected:
     int age;
     const int id_;
 public:
-    Animal(string name, int age) : id_(next_id++), name(move(name)), age(age) {};
+    Animal(string name, int age) : id_(next_id++), name(std::move(name)), age(age) {};
 
-    Animal& operator=(Animal&& other) noexcept {
+    Animal& operator=(const Animal& other) {
         if (this != &other) {
-            name = std::move(other.name);
+            name = other.name;
             age = other.age;
         }
         return *this;
