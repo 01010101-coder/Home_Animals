@@ -11,26 +11,32 @@ class Fish : public Animal {
 private:
     string color;
     string size;
+    string diet;
 public:
-    Fish(string name, int age, string color, string size) : Animal(std::move(name), age), color(std::move(color)), size(std::move(size)) {};
+    Fish(string name, int age, string color, string size, string diet) : Animal(std::move(name), age), color(std::move(color)), size(std::move(size)), diet(diet) {};
 
-    Fish(Fish&& other) noexcept : Animal(other), color(std::move(other.color)), size(std::move(other.size)) {}
+    Fish(Fish&& other) noexcept : Animal(other), color(std::move(other.color)), size(std::move(other.size)), diet(diet) {}
 
     Fish& operator=(Fish&& other) noexcept {
         if (this != &other) {
             Animal::operator=(other); // Вызываем оператор присваивания перемещения базового класса
             color = std::move(other.color);
             size = std::move(other.size);
+            diet = std::move(other.diet);
         }
         return *this;
     }
 
-    string getColor() {
+    string getColor() const {
         return color;
     }
 
-    string getSize() {
+    string getSize() const {
         return size;
+    }
+
+    string getDiet() const {
+        return diet;
     }
 
     void setColor(string _color) {
@@ -39,6 +45,10 @@ public:
 
     void setSize(string _size) {
         this->size = std::move(_size);
+    }
+
+    void setDiet(string _diet) {
+        this->diet = std::move(_diet);
     }
 
     void makeSound() const override {

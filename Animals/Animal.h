@@ -22,6 +22,8 @@ public:
         return *this;
     }
 
+    virtual ~Animal() = default;
+
     string getName() const;
     int getAge() const;
 

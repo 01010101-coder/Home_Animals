@@ -11,4 +11,6 @@ add_executable(Home_Animals main.cpp
         User.cpp
         Animals/Dog.h
         Animals/Fish.h
-        Animals/Unknown.h)
+        Animals/Hamster.h
+        Animals/Factory.h
+)

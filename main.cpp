@@ -7,11 +7,8 @@
 #include <memory>
 #include <unordered_set>
 #include <unordered_map>
-#include "Animals/Cat.h"
-#include "Animals/Dog.h"
-#include "Animals/Fish.h"
-#include "Animals/Unknown.h"
 #include "User.h"
+#include "Animals/Factory.h"
 
 int Animal::next_id = 1;
 
@@ -24,18 +21,30 @@ void split(const string &s, vector<string> &words) { // сплитим стро�
     }
 }
 
-void getTypeOfClass(string type, vector<string> &words, vector<Animal*>& animals) { // функция для определения типа животного
+void getTypeOfClass(const string& type, vector<string> &words, vector<Animal*>& animals) { // функция для определения типа животного
     if (type == "Кот") {
-        animals.push_back(new Cat(words[2], stoi(words[3]), words[4]));
+        CatFactory catFactory;
+        Animal* cat = catFactory.createAnimal(words);
+        animals.push_back(cat);
+        delete cat;
     }
     else if (type == "Собака") {
-        animals.push_back(new Dog(words[2], stoi(words[3]), words[4], stoi(words[5])));
+        DogFactory dogFactory;
+        Animal* dog = dogFactory.createAnimal(words);
+        animals.push_back(dog);
+        delete dog;
     }
     else if (type == "Рыба") {
-        animals.push_back(new Fish(words[2], stoi(words[3]), words[4], words[5]));
+        FishFactory fishFactory;
+        Animal* fish = fishFactory.createAnimal(words);
+        animals.push_back(fish);
+        delete fish;
     }
-    else {
-        animals.push_back(new Unknown(words[2], stoi(words[3]), type, words[4]));
+    else if (type == "Хомяк"){
+        HamsterFactory hamsterFactory;
+        Animal* hamster = hamsterFactory.createAnimal(words);
+        animals.push_back(hamster);
+        delete hamster;
     }
 }
 
@@ -64,7 +73,7 @@ int countUniqueValues(const vector<Animal*>& vec) {
     return uniqueSet.size();
 }
 
-void printType(const string cons, const map<User, vector<Animal*>> &users) {
+void printType(const string& cons, const map<User, vector<Animal*>> &users) {
     unordered_map<string, string> animals; // создаем unordered_map для хранения только уникальных животных у каждого пользователя
     for (const auto& user : users) { // перебираем пользователей
         for (const auto& animal : user.second) { // перебираем всех животных пользователя
@@ -89,7 +98,7 @@ void printType(const string cons, const map<User, vector<Animal*>> &users) {
     }
 }
 
-void countAnimal(const string cons, const map<User, vector<Animal*>> &users) {
+void countAnimal(const string& cons, const map<User, vector<Animal*>> &users) {
     int count = 0; // счетчик
     for (const auto& user : users) { // перебираем пользователей
         for (const auto& animal : user.second) { // перебираем животных пользователей
@@ -146,6 +155,10 @@ int main() {
         split(line, words); // сплитим ее
         addData(users, words); // добавляем в словарь нового пользователя или животного к пользователю
         words.clear(); // очиващаем строку
+    }
+
+    if (users.empty()) {
+        throw runtime_error("No data!");
     }
 
     bool isRunning = true;
