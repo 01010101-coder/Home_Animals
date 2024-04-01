@@ -12,7 +12,6 @@
 
 int Animal::next_id = 1;
 
-
 void split(const string &s, vector<string> &words) { // сплитим строку
     istringstream ss(s);
     string item;
