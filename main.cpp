@@ -11,6 +11,7 @@
 #include "Animals/Factory.h"
 #include "Animals/Composite.h"
 
+
 int Animal::next_id = 1;
 
 void split(const string &s, vector<string> &words) { // сплитим строку
