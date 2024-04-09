@@ -10,8 +10,10 @@ private:
     string species;
     string size;
     double weight;
+
+    int cost = 75;
 public:
-    Hamster(string name, int age, string species, string size, double weight) : Animal(std::move(name), age), species(std::move(species)), size(std::move(size)), weight(weight) {}
+    Hamster(const string& name, int age, const string& species, const string& size, double weight) : Animal(name, age), species(species), size(size), weight(weight) {}
 
     Hamster(Hamster&& other) noexcept : Animal(other), species(other.species), size(other.size), weight(other.weight) {}
 
@@ -55,6 +57,10 @@ public:
 
     string getType() const override {
          return "Хомяк";
+    }
+
+    int getCost() const override {
+        return cost;
     }
 };
 

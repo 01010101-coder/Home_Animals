@@ -9,6 +9,7 @@
 #include <unordered_map>
 #include "User.h"
 #include "Animals/Factory.h"
+#include "Animals/Composite.h"
 
 int Animal::next_id = 1;
 
@@ -45,6 +46,10 @@ void getTypeOfClass(const string& type, vector<string> &words, vector<Animal*>& 
         animals.push_back(hamster);
         delete hamster;
     }
+}
+
+void addData2(vector<string>& words, CompositeAnimal* composite) {
+
 }
 
 void addData(map<User, vector<Animal*>>& users, vector<string>& words) {
@@ -148,6 +153,12 @@ int main() {
 
     string line; // переменная для обхода файла
     vector<string> words; // переменная где мы будем хранить слова
+
+    CompositeAnimal composite;
+    composite.add(new Cat("Stepan", 5, "Black", "Male", 3.4, "Perfect"));
+    composite.add(new Dog("Sharik", 2, "Spaniel", "Grey", 5.6, "Good", 1));
+    cout << composite.getCost() << endl ;
+
 
     map<User, vector<Animal*>> users; // словарь, который мы используем, чтобы хранить пользователей и их животных
     while (getline(input, line)) { // пока получаем строку

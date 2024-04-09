@@ -12,7 +12,11 @@ protected:
     int age;
     const int id_;
 public:
-    Animal(string name, int age) : id_(next_id++), name(std::move(name)), age(age) {};
+    Animal(const string& name, int age) : id_(next_id++), name(name), age(age) {};
+
+//    Animal(Animal&& other) : id_(other.id_), name(std::move(other.name)), age(other.age) {};
+
+    Animal(): id_(next_id++), name(""), age(0) {};
 
     Animal& operator=(const Animal& other) {
         if (this != &other) {
@@ -32,5 +36,6 @@ public:
 
     virtual void makeSound() const = 0;
     virtual string getType() const = 0;
+    virtual int getCost() const = 0;
 };
 #endif

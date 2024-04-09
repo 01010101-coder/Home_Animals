@@ -12,8 +12,10 @@ private:
     string color;
     string size;
     string diet;
+
+    int cost = 50;
 public:
-    Fish(string name, int age, string color, string size, string diet) : Animal(std::move(name), age), color(std::move(color)), size(std::move(size)), diet(diet) {};
+    Fish(const string& name, int age, const string& color, const string& size, const string& diet) : Animal(name, age), color(color), size(size), diet(diet) {};
 
     Fish(Fish&& other) noexcept : Animal(std::move(other)), color(std::move(other.color)), size(std::move(other.size)), diet(std::move(other.diet)) {}
 
@@ -57,6 +59,10 @@ public:
 
     string getType() const override {
         return "Рыба";
+    }
+
+    int getCost() const override {
+        return cost;
     }
 };
 

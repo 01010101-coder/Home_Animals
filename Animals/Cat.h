@@ -14,15 +14,13 @@ private:
     double weight;
     string health_status;
 
+    int cost = 300;
+
 public:
-    Cat(string name, int age, string color, string gender, double weight, string health_status) : Animal(
-            std::move(name), age), color(std::move(color)),
-                                                                                                  gender(std::move(
-                                                                                                          gender)),
-                                                                                                  weight(weight),
-                                                                                                  health_status(
-                                                                                                          std::move(
-                                                                                                                  health_status)) {};
+    Cat(const string& name, int age, const string& color, const string& gender,
+        double weight, const string& health_status) : Animal(name, age),
+    color(color), gender(gender), weight(weight), health_status(health_status) {};
+
 
     Cat(Cat &&other) noexcept: Animal(other), color(std::move(other.color)), gender(other.gender), weight(other.weight),
                                health_status(other.health_status) {}
@@ -82,6 +80,10 @@ public:
 
     string getType() const override{
         return "Кот";
+    }
+
+    int getCost() const override {
+        return cost;
     }
 };
 

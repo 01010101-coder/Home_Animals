@@ -14,4 +14,5 @@ add_executable(Home_Animals main.cpp
         Animals/Hamster.h
         Animals/Factory.h
         Animals/Composite.h
+        Animals/Factory_two.h
 )

@@ -8,40 +8,41 @@
 #include <iostream>
 #include <string>
 #include <utility>
-#include <vector>
+#include <vector> 
 
+using namespace std;
 
-class AnimalFactory {
+class AnimalFactory2 {
 public:
-    virtual Animal* createAnimal(vector<string>& params) const = 0;
+    virtual unique_ptr<Animal> createAnimal(const vector<string>& params) const = 0;
     virtual ~AnimalFactory() = default;
 };
 
-class CatFactory : public AnimalFactory {
+class CatFactory : public AnimalFactory2 {
 public:
-     Animal* createAnimal(vector<string>& params) const override {
-        return new Cat(params[2], stoi(params[3]), params[4], params[5], stod(params[6]), params[7]);
+    unique_ptr<Animal> createAnimal(const vector<string>& params) const override {
+        return make_unique<Cat>(params[0], stoi(params[1]), params[2], params[3], stod(params[4]), params[5]);
     }
 };
 
-class DogFactory : public AnimalFactory {
+class DogFactory : public AnimalFactory2 {
 public:
-    Animal* createAnimal(vector<string>& params) const override{
-        return new Dog(params[2], stoi(params[3]), params[4], params[5], stoi(params[6]), params[7], stoi(params[8]));
+    unique_ptr<Animal> createAnimal(const vector<string>& params) const override {
+        return make_unique<Dog>(params[0], stoi(params[1]), params[2], params[3], stoi(params[4]), params[5], stoi(params[6]));
     }
 };
 
-class FishFactory : public AnimalFactory {
+class FishFactory : public AnimalFactory2 {
 public:
-    Animal* createAnimal(vector<string>& params) const override {
-        return new Fish(params[2], stoi(params[3]), params[4], params[5], params[6]);
+    unique_ptr<Animal> createAnimal(const vector<string>& params) const override {
+        return make_unique<Fish>(params[0], stoi(params[1]), params[2], params[3], params[4]);
     }
 };
 
-class HamsterFactory : public AnimalFactory {
+class HamsterFactory : public AnimalFactory2 {
 public:
-    Animal* createAnimal(vector<string>& params) const override {
-        return new Hamster(params[2], stoi(params[3]), params[4], params[5], stod(params[6]));
+    unique_ptr<Animal> createAnimal(const vector<string>& params) const override {
+        return make_unique<Hamster>(params[0], stoi(params[1]), params[2], params[3], stod(params[4]));
     }
 };
 

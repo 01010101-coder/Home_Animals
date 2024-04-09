@@ -14,10 +14,13 @@ private:
     double weight;
     string temperament;
     bool isTrained;
+
+    int cost = 500;
  // name, age, breed, color, weight, temperament, isTrained
 public:
-    Dog(string name, int age, string breed, string color, double weight, string temperament, bool isTrained) : Animal(std::move(name), age),
-    breed(std::move(breed)), color(std::move(color)), weight(weight), temperament(std::move(temperament)), isTrained(isTrained) {};
+    Dog(const string& name, int age, const string& breed, const string& color,
+        double weight, const string& temperament, bool isTrained) : Animal(name, age), breed(breed),
+        color(color), weight(weight), temperament(temperament), isTrained(isTrained) {};
 
     Dog(Dog&& other) noexcept : Animal(other), breed(std::move(other.breed)),
                                 color(std::move(other.color)), weight(other.weight), temperament(other.temperament), isTrained(other.isTrained) {}
@@ -72,6 +75,10 @@ public:
 
     string getType() const override{
         return "Собака";
+    }
+
+    int getCost() const override {
+        return cost;
     }
 };
 
